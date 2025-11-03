@@ -5,6 +5,7 @@ import Compare from "./pages/Compare";
 import Analytics from "./pages/Analytics";
 import Header from "./components/Header";
 import "./index.css"; // import the CSS we added
+import Footer from "../src/components/Footers.jsx";
 
 function App() {
   const location = useLocation();
@@ -46,6 +47,7 @@ function App() {
           <Route path="/analytics" element={<Analytics />} />
         </Routes>
       </div>
+      <Footer/>
     </div>
   );
 }

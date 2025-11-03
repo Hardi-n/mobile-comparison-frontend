@@ -26,11 +26,16 @@ function Compare() {
                 <>
                   <h2 className="text-xl font-semibold">{phone.device}</h2>
                   <p>Brand: {phone.brand}</p>
+                  <p>Price: ${phone.price}</p>
+                  <p>GPU:{phone.price}</p>
+                  <p>Memory:{phone.memory}</p>
+                  <p>UX:{phone.ux}</p>
                   <p>CPU: {phone.cpuName}</p>
                   <p>RAM: {phone.ram}</p>
                   <p>Battery: {phone.battery}</p>
                   <p>Camera: {phone.camera}</p>
                   <p>Total Score: {phone.totalscore}</p>
+                  <p>Insights:{phone.insights}</p>
                 </>
               ) : (
                 <p style={{ color: "#6b7280" }}>

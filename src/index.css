@@ -2,7 +2,7 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
+  
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -24,12 +24,14 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
+  /* display: flex; */
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
-
+#root{
+  width: 100%;
+}
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -95,7 +97,7 @@ body {
 
 /* nav inner layout */
 .nav-inner {
-  max-width: 1180px;
+  /* max-width: 1180px; */
   margin: 0 auto;
   display:flex;
   justify-content:center;
@@ -134,9 +136,9 @@ body {
 
 /* small container utilities used by pages */
 .container {
-  max-width: 1180px;
+  /* max-width: 1180px;
   margin: 28px auto;
-  padding: 0 18px;
+  padding: 0 18px; */
 }
 
 /* phone card baseline (home) */
@@ -145,4 +147,156 @@ body {
   padding: 18px;
   border-radius: 14px;
   box-shadow: 0 10px 30px rgba(2,6,23,0.06);
+}
+/* --- Navbar Styling --- */
+.navbar {
+  background: #f9fafb;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding: 1rem 0;
+}
+
+.nav-inner {
+  /* max-width: 1000px; */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 13rem;
+}
+
+.nav-link {
+  padding: 0.6rem 2.5rem;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.2);
+  color: #2563eb;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: #2563eb;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  background: #2563eb;
+  color: white;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+}
+
+.container {
+  /* max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem; */
+  margin: 2rem 3rem;
+}
+
+.header{
+  margin: 1rem 3rem;
+}
+.span{
+  margin: 1.5rem 0 0 0;
+}
+.flex{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.logo{
+  border-radius: 25%;
+  height: 50px;
+  margin: 0.5rem 1rem 2rem 1rem;
+}
+
+.phone-card {
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 15px;
+  padding: 20px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.phone-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+.phone-info {
+  margin-bottom: 10px;
+}
+
+.phone-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+.phone-brand {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.phone-tags {
+  margin-top: 8px;
+}
+
+.tag {
+  background-color: #e0ecff;
+  color: #2563eb;
+  font-size: 0.8rem;
+  padding: 3px 8px;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+.compare-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.compare-btn:hover {
+  background-color: #1e4fcc;
+}
+.home-container {
+  padding: 40px 60px;
+  background-color: #f5f6fa;
+  min-height: 100vh;
+}
+
+.home-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.phone-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  justify-content: center;
+  gap: 25px;
+}
+.phone-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }

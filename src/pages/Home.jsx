@@ -1,19 +1,21 @@
 import { phones } from "../data";
 import PhoneCard from "../components/PhoneCard";
+// import "./Home.css"; // Import CSS
 
 function Home() {
-  return (
-    <div>
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">
-        Browse Phones
-      </h1>
+  const randomPhones = phones.sort(() => 0.5 - Math.random()).slice(0, 10);
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {phones.map((phone) => (
+  return (
+    <div className="home-container">
+      <h1 className="home-title">Browse Phones</h1>
+
+      <div className="phone-grid">
+        {randomPhones.map((phone) => (
           <PhoneCard key={phone.id} phone={phone} />
         ))}
       </div>
     </div>
   );
 }
+
 export default Home;
