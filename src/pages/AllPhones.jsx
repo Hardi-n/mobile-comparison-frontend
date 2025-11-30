@@ -1,28 +1,35 @@
-import React, { useState } from "react";
-import { phones } from "../data.js";
+import React, { useState, useEffect } from "react";
 import { useCompare } from "../context/CompareContext";
 
 export default function AllPhones() {
+  const [phones, setPhones] = useState([]);
   const [query, setQuery] = useState("");
-  const [addedPhones, setAddedPhones] = useState([]); // track added phones
-  const [message, setMessage] = useState(""); // success message
+  const { addPhone, phonesToCompare } = useCompare();
+  const [message, setMessage] = useState("");
 
-  const { addPhone } = useCompare();
+  // Refresh UI button states automatically based on CompareContext
+const addedPhones = phonesToCompare.map((p) => p.device);
+
+  useEffect(() => {
+    const loadPhones = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/phones");
+        const data = await res.json();
+        setPhones(data);
+      } catch (error) {
+        console.error("Failed to fetch phones:", error);
+      }
+    };
+    loadPhones();
+  }, []);
 
   const filteredPhones = phones.filter((phone) =>
-    phone.device?.toLowerCase().includes(query.toLowerCase())
+    (phone.device || phone.name).toLowerCase().includes(query.toLowerCase())
   );
 
   const handleAdd = (phone) => {
     addPhone(phone);
-
-    // Mark button as active
-    setAddedPhones((prev) => [...prev, phone.id]);
-
-    // Show message
     setMessage(`${phone.device} added to compare`);
-
-    // Hide message after 2 seconds
     setTimeout(() => setMessage(""), 2000);
   };
 
@@ -30,39 +37,36 @@ export default function AllPhones() {
     <div className="phones-container">
       <h1 className="phones-title">All Phones</h1>
 
-      {/* Message */}
       {message && <p className="success-msg">{message}</p>}
 
-      {/* Search Bar */}
       <input
         type="text"
         className="search-bar"
         placeholder="Search Phones..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        style={{ marginBottom: "20px", padding: "10px", width: "100%" }}
       />
 
       <ul className="phones-list">
-        {filteredPhones.length === 0 ? (
-          <p className="no-result">No phones found.</p>
-        ) : (
-          filteredPhones.map((phone) => (
-            <li key={phone.id} className="phone-item">
-              <div className="phone-name">{phone.device}</div>
-              <div className="phone-brand">Brand: {phone.brand}</div>
-              <div className="phone-score">AnTuTu Score: {phone.totalscore}</div>
+        {filteredPhones.map((phone) => (
+          <li key={phone.id} className="phone-item">
+            <div className="phone-name">{phone.device}</div>
+            <div className="phone-brand">Rating: {phone.rating}</div>
+            <div className="phone-score">
+              AnTuTu Score: {phone.antutu_score ?? "N/A"}
+            </div>
 
-              <button
-                onClick={() => handleAdd(phone)}
-                className={`compare-btn ${
-                  addedPhones.includes(phone.id) ? "added" : ""
-                }`}
-              >
-                {addedPhones.includes(phone.id) ? "Added" : "Compare"}
-              </button>
-            </li>
-          ))
-        )}
+            <button
+              onClick={() => handleAdd(phone)}
+              className={`compare-btn ${
+                addedPhones.includes(phone.device) ? "added" : ""
+              }`}
+            >
+              {addedPhones.includes(phone.device) ? "Added" : "Compare"}
+            </button>
+          </li>
+        ))}
       </ul>
     </div>
   );

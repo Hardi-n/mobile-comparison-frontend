@@ -15,27 +15,59 @@ function Compare() {
               key={index}
               style={{
                 flex: 1,
+                display: "flex",
+                gap: "20px",
                 padding: "20px",
                 background: "#fff",
                 borderRadius: "12px",
                 boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
                 minHeight: "200px",
+                alignItems: "flex-start",
               }}
             >
               {phone ? (
                 <>
-                  <h2 className="text-xl font-semibold">{phone.device}</h2>
-                  <p>Brand: {phone.brand}</p>
-                  <p>Price: ${phone.price}</p>
-                  <p>GPU:{phone.price}</p>
-                  <p>Memory:{phone.memory}</p>
-                  <p>UX:{phone.ux}</p>
-                  <p>CPU: {phone.cpuName}</p>
-                  <p>RAM: {phone.ram}</p>
-                  <p>Battery: {phone.battery}</p>
-                  <p>Camera: {phone.camera}</p>
-                  <p>Total Score: {phone.totalscore}</p>
-                  <p>Insights:{phone.insights}</p>
+                  {/* Image column */}
+                  <div style={{ flex: "0 0 150px" }}>
+                    {phone.image_url ? (
+                      <img
+                        src={phone.image_url} // make sure this key matches your API
+                        alt={phone.name || phone.device}
+                        style={{
+                          width: "100%",
+                          height: "auto",
+                          borderRadius: "8px",
+                        }}
+                      />
+                    ) : (
+                      <p>No image available</p>
+                    )}
+                  </div>
+
+                  {/* Details column */}
+                  <div style={{ flex: 1 }}>
+                    <h2 className="text-xl font-semibold">{phone.device}</h2>
+                    {/* <p>Brand: {phone.brand}</p> */}
+                    <p>Price: Rs.{phone.price}</p>
+                    {/* <p>GPU: {phone.gpu}</p> */}
+                    <p>CPU: {phone.processor}</p>
+                    <p>RAM: {phone.ram}</p>
+                    <p>Battery: {phone.battery}</p>
+                    {/* <p>Camera: {phone.camera}</p> */}
+                    <p>Storage: {phone.storage}</p>
+                    <p>Camera:{phone.camera}</p>
+                    {/* <p>Display: {phone.display}</p> */}
+                    {/* <p>Website:<a>{phone.website_url}</a></p> */}
+                    <p>Height:{phone.height}</p>
+                    <p>Upvotes:{phone.upvotes}</p>
+                    <p>Reviews:{phone.reviews}</p>
+                    <p>Rating: {phone.rating}</p>
+                    {/* <p>OS Version: {phone.os_version}</p> */}
+                    {/* <p>Refresh Rate: {phone.refresh_rate_Hz}</p> */}
+                    {/* <p>Wireless Charging: {phone.wireless_charging}</p> */}
+                    {/* <p>IP Rating: {phone.ip_rating}</p> */}
+                    <p>Total Score: {phone.antutu_score}</p>
+                  </div>
                 </>
               ) : (
                 <p style={{ color: "#6b7280" }}>

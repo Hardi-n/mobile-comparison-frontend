@@ -8,9 +8,11 @@ export function CompareProvider({ children }) {
   function addPhone(phone) {
     setPhonesToCompare((prev) => {
       // allow max 2 phones
-      if (prev.length >= 2) return [phone];
-      // avoid duplicates
-      if (prev.find((p) => p.id === phone.id)) return prev;
+      if (prev.length >= 2) return prev;
+
+      // avoid duplicates (use device name instead of id)
+      if (prev.find((p) => p.device === phone.device)) return prev;
+
       return [...prev, phone];
     });
   }

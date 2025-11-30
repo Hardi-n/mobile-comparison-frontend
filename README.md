@@ -1,82 +1,145 @@
-# 📱 Phone Comparison App
+# Smartphone Analytics Project
 
-A React + Vite project to browse, compare, and analyze smartphones.  
-This app allows users to:
-- Browse a list of phones with detailed specs
-- Get AI-based recommendations (demo feature)
-- Compare two phones side by side
-- View analytics of phone performance
+This project is a **Smartphone Analytics Dashboard** that analyzes phone data such as performance (AnTuTu scores), price, battery, RAM, camera quality, user ratings, storage options, and reviews. The data is fetched from a **MySQL database** via a **Node.js backend** and displayed in a **React frontend**.
 
 ---
 
-## 🚀 Features
-- Built with **React + Vite**
-- **React Router** for navigation
-- **Tailwind CSS** for modern styling
-- Component-based architecture
-- Compare feature for phones
+## 🔧 Prerequisites
+
+Before running the project, make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [MySQL](https://dev.mysql.com/downloads/mysql/)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [React](https://reactjs.org/) (via Create React App or Vite)
 
 ---
 
-## 📂 Project Structure
-```
-    .
-    ├── src/
-    │ ├── components/ # Reusable components like PhoneCard, Header
-    | ├── context/ # CompareContext for the comparision data
-    │ ├── pages/ # Pages: Home, Recommendations, Compare, Analytics
-    │ ├── data.js # Phone data
-    │ ├── App.jsx # Main app with routes
-    │ └── main.jsx # Vite entry point
-    ├── public/ # Static assets
-    ├── package.json
-    └── vite.config.js
-```
+## 🗄 Database Setup
 
+1. **Start MySQL Server**:
 
----
+   Make sure your MySQL server is running on **port 3306**.
 
+2. **Create Database and Table**:
 
----
+   ```sql
+   CREATE DATABASE smartphone_db;
 
-## 🛠️ Getting Started
+   USE smartphone_db;
 
-### 1️⃣ Clone the repository
-```bash
-git clone https://github.com/Hardi-n/mobile-comparison.git
-cd mobile-comparison
-```
-### 2️⃣ Install dependencies
-```
+   CREATE TABLE smartphones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    device VARCHAR(255),
+    processor VARCHAR(255),
+    ram VARCHAR(100),
+    storage VARCHAR(100),
+    battery VARCHAR(100),
+    price INT,
+    antutu_score INT,
+    category VARCHAR(255),
+    value_score FLOAT,
+    rating FLOAT,
+    height VARCHAR(100),
+    website_url TEXT,
+    image_url TEXT,
+    upvotes INT,
+    reviews INT,
+    camera VARCHAR(255)
+   );
+   ```
+
+Insert your data into the phones table using your preferred method (CSV import, SQL insert statements, or MySQL Workbench).
+
+🖥 Backend Setup (Node.js + Express)
+
+Navigate to the backend folder:
+
+cd backend
+
+Install dependencies:
+
 npm install
-```
 
-### 3️⃣ Start the development server
-```npm run dev
-```
+Configure database connection in db.js:
 
-### 📦 Dependencies
-```
-    Main libraries & tools used:
+import mysql from "mysql2";
 
-    React
+export const db = mysql.createConnection({
+host: "localhost",
+user: "root",
+password: "your_mysql_password",
+database: "smartphone_db",
+port: 3306
+});
 
-    Vite
+Start the backend server:
 
-    React Router
+npm start
 
-    Tailwind CSS
+The backend runs on port 5000.
 
-    PostCSS
+Available API endpoints:
 
-    Autoprefixer
-```
-### 🎨 Styling
-```
-    Tailwind CSS is already configured.
-    To customize styles, edit:
+GET /phones → fetch all phones
 
-    tailwind.config.js
+GET /phones/:id → fetch a phone by ID
 
-    src/index.css
-```
+GET /phones/search?q=query → search phones by brand
+
+🌐 Frontend Setup (React)
+
+Navigate to the frontend folder:
+
+cd frontend
+
+Install dependencies:
+
+npm install
+
+Start the frontend:
+
+npm start
+
+The frontend runs on port 3173.
+
+Connect frontend with backend:
+
+All API calls in the frontend should point to http://localhost:5000/phones or other backend endpoints.
+
+🚀 Running the Project
+
+Start MySQL server on port 3306.
+
+Start backend on port 5000.
+
+Start frontend on port 3173.
+
+Open the browser at http://localhost:3173
+to see the analytics dashboard.
+
+📦 Project Structure
+project-root/
+│
+├─ backend/
+│ ├─ controllers/phonesController.js
+│ ├─ routes/phonesRoutes.js
+│ ├─ db.js
+│ └─ server.js
+│
+├─ frontend/
+│ ├─ src/
+│ │ ├─ components/
+│ │ ├─ pages/
+│ │ └─ App.jsx
+│ └─ package.json
+│
+└─ README.md
+
+⚡ Notes
+
+Ensure ports do not conflict: backend 5000, frontend 3173, MySQL 3306.
+
+Numeric fields like rating, price, battery, etc., are stored as strings in the database. Convert them to numbers in React using parseFloat() or helper functions.
+
+You can create additional backend endpoints to fetch metrics like most-reviewed or best-camera phones directly from SQL, which improves performance by reducing frontend calculations.

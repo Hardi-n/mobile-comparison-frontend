@@ -3,12 +3,13 @@ import Home from "./pages/Home";
 import Recommendations from "./pages/Recommendations";
 import Compare from "./pages/Compare";
 // import Analytics from "./pages/Analytics";
-import Analytics from "./components/Analytics.jsx";
+import Analytics from "./pages/Analytics.jsx";
 import Header from "./components/Header";
 import "./index.css"; // import the CSS we added
 import Footer from "../src/components/Footers.jsx";
 import AllPhones from "./pages/AllPhones.jsx";
 import About from './pages/About.jsx';
+import Contact from "./pages/Contact.jsx";
 
 function App() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function App() {
     { to: "/compare", label: "Comparison" },
     { to: "/analytics", label: "Analytics" },
     { to: "/about", label: "About" },
+    // { to: "/contact", label: "Contact" },
   ];
 
   return (
@@ -52,6 +54,7 @@ function App() {
           <Route path="/compare" element={<Compare />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
       <Footer/>

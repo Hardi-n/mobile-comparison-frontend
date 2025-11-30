@@ -14,17 +14,38 @@ function PhoneCard({ phone }) {
   return (
     <div className="phone-card">
       <div className="phone-info">
+        {/* {phone.image ? (
+          <img
+            src={phone.image_url} // replace 'image' with the actual key from your API
+            alt={phone.name || phone.device}
+            className="phone-image"
+          />
+        ) : (
+          <p>No image available</p>
+        )} */}
         <h2 className="phone-title">{phone.device}</h2>
         <p className="phone-brand">{phone.brand}</p>
-        <p><strong>CPU:</strong> {phone.cpuName}</p>
-        <p><strong>AnTuTu:</strong> {phone.totalscore.toLocaleString()}</p>
-        <p><strong>RAM:</strong> {phone.ram}</p>
-        <p><strong>Battery:</strong> {phone.battery}</p>
-        <p><strong>Camera:</strong> {phone.camera}</p>
+        <p>
+          <strong>CPU:</strong> {phone.processor}
+        </p>
+        <p>
+          <strong>AnTuTu:</strong> {phone.antutu_score}
+        </p>
+        <p>
+          <strong>RAM:</strong> {phone.ram}
+        </p>
+        <p>
+          <strong>Battery:</strong> {phone.battery} mah
+        </p>
+        <p>
+          <strong>Camera:</strong> {phone.camera}
+        </p>
 
         <div className="phone-tags">
           {phone.tags?.map((tag, i) => (
-            <span key={i} className="tag">#{tag}</span>
+            <span key={i} className="tag">
+              #{tag}
+            </span>
           ))}
         </div>
       </div>
